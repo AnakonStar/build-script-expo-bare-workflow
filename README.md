@@ -37,7 +37,15 @@ Após ter instalado ela, será necessário inserir uma linha dentro da seção d
   ...
 }
 ```
-Pronto, com isso feito, já está tudo configurado para usar o script em seu projeto
+
+Pronto, com isso feito, já está tudo configurado para usar o script em seu projeto. Apenas rode ele com o comando a seguir:
+```
+$ npm run app:<build_type> -- -<platform>
+```
+Alterando `<build_type>` por `debug` ou `release` e `<platform>` por `android` ou `ios`. Siga o fluxo do script e pronto, seu projeto já estará sendo buildando e rodando em algum aparelho conectado, seja emulador ou aparelho fisíco, sem necessidade de alterar versionName e versionCode manualmente ou até mesmo limpar cache de builds anteriores, o script já cuida de tudo isso de acordo com suas preferencias!
+
+> [!Tip]
+> Caso queira saber como configurar um ambiente para rodar seu aplicativo em React Native, não tendo nada configurado, siga meu guia de Notas gerais de desenvolvimento!
 
 ## Using the script
 
@@ -70,6 +78,7 @@ android {
     ...
 }
 ```
+
 - Uso dentro do Java caso tenha inserido dentro de android/defaultConfig
 ```
 // MainApplication.java
@@ -116,6 +125,7 @@ public class MainApplication extends Application implements ReactApplication {
     ...
 }
 ```
+
 Caso queira utilizar desta feature do script de build (não obrigatório), apenas insira suas variáveis nesta seção:
 ```
 ...
