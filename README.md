@@ -37,6 +37,96 @@ Após ter instalado ela, será necessário inserir uma linha dentro da seção d
   ...
 }
 ```
+Pronto, com isso feito, já está tudo configurado para usar o script em seu projeto
+
+## Using the script
+
+Dependendo da necessidade do projeto, o script pode ser alterado da forma como se adequar melhor a seu projeto, tendo isso em mente, vamos aqui somente destrinchar alguns pontos:
+
+- Uso de variáveis de ambiente dentro da parte nativa
+
+Para aqueles que não sabem, é possível passar algumas variávies para a parte nativa do seu aplicativo durante a execução de qualquer comando usado para rodar seu aplicativo com o React Native. Um exemplo disso é passar uma variavél `HELLO_WORLD="teste"`, e captar ele na parte em Java do seu projeto dessa forma:
+```
+// app/build.gradle
+
+def hello_world = System.getenv("HELLO_WORLD") ?: ""
+
+// Receber para utilizar de forma a aplicar alguma lib de forma condicional no gradle
+if (hello_world == "teste") {
+    apply from: 'some-random-lib'
+}
 
 
+android {
+    ...
 
+    defaultConfig {
+        ...
+        versionCode 745
+        versionName "2.0.35"
+        // Inserir aqui para utilizar dentro dos arquivos *.java do seu projeto
+        buildConfigField "String", "HELLO_WORLD", "\"${hello_world}\""
+    }
+    ...
+}
+```
+- Uso dentro do Java caso tenha inserido dentro de android/defaultConfig
+```
+// MainApplication.java
+
+...
+
+public class MainApplication extends Application implements ReactApplication {
+
+    private final ReactNativeHost mReactNativeHost = new ReactNativeHostWrapper(
+      this,
+      new ReactNativeHost(this) {
+        @Override
+        public boolean getUseDeveloperSupport() {
+          return BuildConfig.DEBUG;
+        }
+  
+        @Override
+        protected List<ReactPackage> getPackages() {
+            @SuppressWarnings("UnnecessaryLocalVariable")
+            List<ReactPackage> packages = new PackageList(this).getPackages();
+    
+            String hello_world = BuildConfig.HELLOW_WORLD.toLowerCase();
+          
+            if (hello_world != null) {
+                hello_world = hello_world.toLowerCase();
+            } else {
+                hello_world = "";
+            }
+          
+            switch (hello_world) {
+                case "teste":
+                    packages.add(new RandomPackage()); // Possivel adicionar um package de forma condicional a variável
+                    break;
+                default:
+                    break;
+            }
+
+            ...
+        }
+
+        ...
+    }
+
+    ...
+}
+```
+Caso queira utilizar desta feature do script de build (não obrigatório), apenas insira suas variáveis nesta seção:
+```
+...
+function runBuild() {
+    const envVars = [
+      "HELLO_WORLD=teste" // Dessa forma
+    ].join(' ');
+
+    ...
+}
+```
+
+> [!Warning]
+> Totalmente configuravél para Android, futuras atualizações irão conter o necessário para iOS
