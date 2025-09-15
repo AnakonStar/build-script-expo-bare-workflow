@@ -45,7 +45,7 @@ $ npm run app:<build_type> -- -<platform>
 Alterando `<build_type>` por `debug` ou `release` e `<platform>` por `android` ou `ios`. Siga o fluxo do script e pronto, seu projeto já estará sendo buildando e rodando em algum aparelho conectado, seja emulador ou aparelho fisíco, sem necessidade de alterar versionName e versionCode manualmente ou até mesmo limpar cache de builds anteriores, o script já cuida de tudo isso de acordo com suas preferencias!
 
 > [!Tip]
-> Caso queira saber como configurar um ambiente para rodar seu aplicativo em React Native, não tendo nada configurado, siga meu guia de Notas gerais de desenvolvimento!
+> Caso queira saber como configurar um ambiente para rodar seu aplicativo em React Native, não tendo nada configurado, siga meu guia de [Notas gerais de Desenvolvimento](https://github.com/AnakonStar/notas-gerais-de-desenvolvimento)!
 
 ## Using the script
 
