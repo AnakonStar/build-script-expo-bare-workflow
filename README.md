@@ -1,2 +1,2 @@
-# build-script-expo-bare-workflow
-Build Script for apps in Expo Bare Workflow
+# Build Script for App in Expo Bare Workflow  
+
