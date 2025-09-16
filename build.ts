@@ -92,6 +92,7 @@ function updateAppJson(newVersionName: string) {
 
     appJson.expo.android.versionName = newVersionName;
     appJson.expo.android.versionCode = newVersionCode;
+    appJson.expo.ios.buildNumber = newVersionName;
     appJson.expo.version = newVersionName;
 
     writeFileSync(appJsonPath, JSON.stringify(appJson, null, 2));
@@ -100,7 +101,7 @@ function updateAppJson(newVersionName: string) {
     console.log(chalk.cyan(`🔧 Rodando expo prebuild --platform ${platform}...`));
     try {
         const prebuildOutput = execSync(`npx expo prebuild --platform ${platform}`, { encoding: 'utf8' });
-        console.log(chalk.green('✔ Expo prebuild concluído.\n'));
+        console.log(chalk.green('✅ Expo prebuild concluído.\n'));
     } catch (error: any) {
         console.error(chalk.red('❌ Erro durante o expo prebuild:'));
         console.error(chalk.red(error.stdout || error.message));
@@ -137,7 +138,7 @@ function askClean() {
             if (cleanCommand) {
                 try {
                     execSync(cleanCommand, { encoding: 'utf8' });
-                    console.log(chalk.green('\n✔ Cache limpo.\n'));
+                    console.log(chalk.green('\n✅ Cache limpo.\n'));
                 } catch (error: any) {
                     console.error(chalk.red('❌ Erro ao limpar o cache:'));
                     console.error(chalk.red(error.stdout || error.message));
@@ -167,7 +168,7 @@ function runPodInstall() {
     console.log(chalk.cyan('\n📦 Rodando pod install...\n'));
     try {
         execSync('cd ios && pod install', { stdio: 'inherit' });
-        console.log(chalk.green('✔ pod install concluído.\n'));
+        console.log(chalk.green('✅ pod install concluído.\n'));
     } catch (error: any) {
         console.error(chalk.red('❌ Erro durante o pod install:'));
         console.error(chalk.red(error.stdout || error.message));
