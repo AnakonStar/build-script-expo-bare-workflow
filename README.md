@@ -25,13 +25,16 @@ Após ter instalado ela, será necessário inserir uma linha dentro da seção d
   ...
   "scripts": {
     ...
-    "app:debug": "ts-node scripts/build.ts debug", // Rodar em debug
-    "app:release": "ts-node scripts/build.ts release" // Rodar em release
-  }, 
+    - // "app:debug": "ts-node scripts/build.ts debug",
+    - // "app:release": "ts-node scripts/build.ts release"
+    + "app:debug": "tsx scripts/build.ts debug", // Rodar em debug
+  + "app:release": "tsx scripts/build.ts release" // Rodar em release
+   }, 
   ...
   "devDependencies": {
     ...
-    "ts-node": "*", // Lib instalada 
+    - // "ts-node": "*",
+    + "tsx": "^4.19.1", // Lib instalada
     "typescript": "*" // Pre requisito do seu projeto para executar o script
   },
   ...
