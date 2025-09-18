@@ -182,7 +182,7 @@ function runBuild() {
     const envVars = [
     ].join(' ');
 
-    const command = `${envVars} npx react-native run-${platform} ${mode === 'release' ? '--variant release' : ''}`;
+    const command = `${envVars} npx react-native run-${platform} ${mode === 'release' ? '--mode=release' : ''}`;
     console.log(chalk.cyan(`\n🚀 Iniciando build da aplicação ${platform}...\n`));
     console.log(chalk.gray('Isso pode levar alguns minutos.'));
     try {
@@ -196,5 +196,3 @@ function runBuild() {
 
 
 askVersionName();
-
-
