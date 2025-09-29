@@ -5,6 +5,10 @@ Este script foi criado com a intenção de facilitar para devs que utilizam o Ex
 > [!NOTE]
 > Mas atenha-se ao fato de que este script foi feito para funcionar com o Expo, sem o uso do Expo Dev Client, para aqueles que querem mexer diretamente na parte nativa, sem restrições e quase como se estivesse utilizando o próprio Expo!
 
+## NOVIDADE - Utilizando para rodar no iOS
+
+Agora na versão 1.1.0, é possível utilizar o script para rodar em iOS, permitindo desde a criação do arquivo .ipa, à até mesmo rodar seu aplicativo em um aparelho diretamente durante o build! Apenas siga da mesma forma como utilizava o script anteriormente, apenas selecionando as opções para iOS
+
 ## Get started
 
 Para começar a utilizar deste script, é necessário algumas configurações a serem feitas, a começar com as libs, é necessário o uso do `ts-node`, que permite execução de scripts em Typescript, compilando o código de forma que o Node.js entenda (algo semelhante a criar a pasta dist de um projeto)
@@ -25,10 +29,8 @@ Após ter instalado ela, será necessário inserir uma linha dentro da seção d
   ...
   "scripts": {
     ...
-    - // "app:debug": "ts-node scripts/build.ts debug",
-    - // "app:release": "ts-node scripts/build.ts release"
-    + "app:debug": "tsx scripts/build.ts debug", // Rodar em debug
-  + "app:release": "tsx scripts/build.ts release" // Rodar em release
+    - // "app:build": "ts-node scripts/build.ts"
+    + "app:build": ""tsx scripts/build.ts" // Rodar build
    }, 
   ...
   "devDependencies": {
@@ -43,9 +45,9 @@ Após ter instalado ela, será necessário inserir uma linha dentro da seção d
 
 Pronto, com isso feito, já está tudo configurado para usar o script em seu projeto. Apenas rode ele com o comando a seguir:
 ```
-$ npm run app:<build_type> -- -<platform>
+$ npm run app:build
 ```
-Alterando `<build_type>` por `debug` ou `release` e `<platform>` por `android` ou `ios`. Siga o fluxo do script e pronto, seu projeto já estará sendo buildando e rodando em algum aparelho conectado, seja emulador ou aparelho fisíco, sem necessidade de alterar versionName e versionCode manualmente ou até mesmo limpar cache de builds anteriores, o script já cuida de tudo isso de acordo com suas preferencias!
+Siga o fluxo do script e pronto, seu projeto já estará sendo buildando e rodando em algum aparelho conectado, seja emulador ou aparelho fisíco, sem necessidade de alterar versionName e versionCode manualmente ou até mesmo limpar cache de builds anteriores, o script já cuida de tudo isso de acordo com suas preferencias, permitindo até mesmo decidir entre gerar os arquivos de .aab/.ipa/.apk (ao final do build é perguntado ao usuário se deseja abrir o local do arquivo gerado) ou rodar diretamente em um aparelho!
 
 > [!Tip]
 > Caso queira saber como configurar um ambiente para rodar seu aplicativo em React Native, não tendo nada configurado, siga meu guia de [Notas gerais de Desenvolvimento](https://github.com/AnakonStar/notas-gerais-de-desenvolvimento)!
@@ -132,14 +134,12 @@ public class MainApplication extends Application implements ReactApplication {
 Caso queira utilizar desta feature do script de build (não obrigatório), apenas insira suas variáveis nesta seção:
 ```
 ...
-function runBuild() {
+async function runBuild(platform: string, mode: string) {
+    // Defina suas variáveis de ambiente aqui
     const envVars = [
-      "HELLO_WORLD=teste" // Dessa forma
-    ].join(' ');
-
+        // Exemplo: 'API_URL=https://api.example.com',
+        // Exemplo: 'ENV=production'
+    ].join(" ");
     ...
 }
 ```
-
-> [!Warning]
-> Totalmente configuravél para Android, futuras atualizações irão conter o necessário para iOS
